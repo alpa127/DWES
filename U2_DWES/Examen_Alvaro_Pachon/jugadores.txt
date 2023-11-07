@@ -1,0 +1,2 @@
+5;Alvaro;2023-10-06;Junior;Femenina;Primera,Segunda B;Entrenamientos,Chandal
+5;Alvaro;2023-10-15;Junior;Femenina;Primera,Segunda A;Entrenamientos,Chandal

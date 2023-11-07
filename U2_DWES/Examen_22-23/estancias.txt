@@ -1,0 +1,9 @@
+MAUROLLORON;RAULPOLLON;Suite;3;3;Tarjeta;Cuna
+MAUROLLORON;RAULPOLLON;Suite;3;3;Tarjeta;Cuna,Cama Supletoria
+MAUROLLORON;RAULPOLLON;Suite;3;3;Tarjeta;Cuna,Cama Supletoria
+MAUROLLORON;RAULPOLLON;Suite;3;3;Tarjeta;Cuna,Cama Supletoria
+MAUROLLORON;RAULPOLLON;Suite;3;3;Tarjeta;Cuna,Cama Supletoria
+MAUROLLORON;RAULPOLLON;Suite;3;3;Tarjeta;Cuna,Cama Supletoria
+asasa;sasasas;Individual;3;3;Tarjeta;Cama Supletoria
+asasa;sasasas;Individual;3;3;Tarjeta;Cuna,Cama Supletoria
+asasa;sasasas;Individual;3;3;Tarjeta;Cuna,Cama Supletoria,Lavanderia
