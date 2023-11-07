@@ -12,9 +12,15 @@
             }
             else{
                 //Comprobar que no existe una pieza con el mismo código
-                $p= $bd->obtenerPieza($_POST['codigo']);
-                if($p==null){
-                    //La pieza no existe, se puede crear
+                $u= $bd->obtenerUsuarios($_POST['dni']);
+                if($u==null){
+                    //Se puede crear
+                    $u = new Usuario(0,$_POST['dni'],$_POST['nombre']);
+                    if($bd->crearUsuario($u)){
+                        $mensaje=array('i','Usuario '.$u->getId().'creado');
+                    }else{
+                        $mensaje = array('e','Usuario con DNI '.$u->getDni().'encontrado');
+                    }
 
                 
                 //Insertar en la BD la pieza
