@@ -7,8 +7,7 @@
         //Boton crear
         if(isset($_POST['crear'])){
             //Comprobar que todos los campos estan rellenos
-            if(empty($_POST['codigo']) or empty($_POST['clase']) or empty($_POST['desc'])
-            or empty($_POST['precio']) or empty($_POST['stock'])){
+            if(empty($_POST['dni']) or empty($_POST['nombre']) or empty($_POST['perfil'])){
                 $mensaje=array('e','Debes rellenar todos los campos');
             }
             else{

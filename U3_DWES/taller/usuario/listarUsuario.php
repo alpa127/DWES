@@ -11,7 +11,7 @@
  <?php
             if($bd->getConexion()!=null){
             //Obtener piezas 
-            $piezas = $bd->obtenerPiezas();
+            $piezas = $bd->obtenerUsuarios();
             }
             //Mostramos las piezas en una tabla  
         ?>
@@ -21,43 +21,48 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Código</th>
-                <th>Clase</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Stock</th>
+                <th>Id</th>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Perfil</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
                 <?php
-                foreach($piezas as $p){
+                foreach($usuarios as $u){
+                   
                     echo '<tr>';
-                    if(isset($_POST['modif']) and $_POST['modif']==$p->getCodigo()){
+                    if(isset($_POST['modif']) and $_POST['modif']==$p->getId()){
                         //Pintar campos para poder modificar
-                        echo '<td> <input type="text" name="codigo" value="" '.$p->getCodigo().'"/></td>';
-                        echo '<td><select name="clase">';
-                        echo 'option'.marcarClaseSeleccionada('Refrigeración',$p->getClase()).'>Refrigeración</option>';
-                        echo 'option'.marcarClaseSeleccionada('Filtro',$p->getClase()).'>Filtro</option>';
-                        echo 'option'.marcarClaseSeleccionada('Motor',$p->getClase()).'>Motor</option>';
-                        echo 'option'.marcarClaseSeleccionada('Otros',$p->getClase()).'>Otros</option>';
+                        echo '<td> <input type="text" name="id" disabled="disabled" value="" '.$u->getId().'"/></td>';
+                        echo '<td><select name="dni" value="'.$u->getDni().'/></td>';
+                        echo '<td><select name="nombre" value="'.$u->getNombre().'/></td>';
+                        echo '<td><select name="perfil">';
+                        echo '<option value"A" '.marcarOptionSeleccionado('Administrador',$u->getPerfil()).'>Administrador</option>';
+                        echo '<option value"M" '.marcarOptionSeleccionado('Mecanico',$u->getPerfil()).'>Mecanico</option>';
                         echo '</select></td>';
-                        echo '<td> <input type="text" name="desc" value="" '.$p->getDescripcion().'"/></td>';
-                        echo '<td> <input type="number" name="preico" step="0.01" value="" '.$p->getPrecio().'"/></td>';
-                        echo '<td> <input type="number" name="stock" value="" '.$p->getStock().'"/></td>';
                         echo '<td>';
-                        echo '<button type="submit" class="btn btn-outline-dark" name="update" value="'.$p->getCodigo().'">Guardar</button>';
+                        echo '<button type="submit" class="btn btn-outline-dark" name="update" value="'.$u->getId().'">Guardar</button>';
                         echo '<button type="submit" class="btn btn-outline-dark"  name="cancelar">Cancelar</button>';
                         echo '</td>';
                     }else{
-                    echo '<td>'.$p->getCodigo().'</td>';
-                    echo '<td>'.$p->getClase().'</td>';
-                    echo '<td>'.$p->getDescripcion().'</td>';
-                    echo '<td>'.$p->getPrecio().'</td>';
-                    echo '<td>'.$p->getStock().'</td>';
+                        switch($u->getPerfil()){
+                            case 'A':
+                                $perfil = "Administrador";
+                                break;
+                            case 'M':
+                                $perfil = "Mecanico";
+                                break;
+
+                        }
+                    echo '<td>'.$u->getId().'</td>';
+                    echo '<td>'.$u->getDni().'</td>';
+                    echo '<td>'.$u->getNombre().'</td>';
+                    echo '<td>'.$u->getPerfil().'</td>';
                     echo '<td>';
-                    echo '<button class="btn btn-outline-dark" name="modif" value="'.$p->getCodigo().'"><img src="../icon/modif25.png"/></button>';
-                    echo '<button class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-tager="#a'.$p->getCodigo().'"><img src="../icon/delete25.png"/></button>';
+                    echo '<button class="btn btn-outline-dark" name="modif" value="'.$u->getId().'"><img src="../icon/modif25.png"/></button>';
+                    echo '<button class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-tager="#a'.$u->getId().'"><img src="../icon/delete25.png"/></button>';
                     echo '</td>';
                     }
                     echo '</tr>';
@@ -65,24 +70,24 @@
                     //Definir ventana modal
                     ?>
                     <!-- The Modal -->
-                    <div class="modal" id="myModal">
+                    <div class="modal" id="a<?php echo $u->getDni(), $u->getNombre(); ?>">
                     <div class="modal-dialog">
                     <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                    <h4 class="modal-title">Borrar Pieza</h4>
+                    <h4 class="modal-title">Borrar Usuario</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                       Estas seguro que desea borrar la pieza?
+                       Estas seguro que desea borrar el usuario?
                     </div>
 
                   <!-- Modal footer -->
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" name="borrar" value="<?php echo $u->getId(); ?>">Close</button>
                     </div>
 
     </div>

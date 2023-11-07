@@ -20,6 +20,21 @@ class Modelo{
         }
     }
 
+    function obtenerUsuarios(){
+        $resultado = array();
+        try{
+            $datos = $this->conexion->query("select * from usuarios order by perfil, nombre");
+            while ($fila=$datos->fetch()) {
+                $u = new Usuario($fila['id'],$fila['dni']
+                ,$fila['nombre'],$fila['perfil']);
+            }
+            }catch(PDOException $e){
+                echo $e->getMessage();
+    
+            }
+        return $resultado;
+    }
+
     function obtenerUsuario(string $us, string $ps){
         $resultado = null;
         try {
