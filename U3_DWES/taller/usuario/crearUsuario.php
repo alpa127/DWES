@@ -11,7 +11,7 @@
                 <div class="col">
                     <label>Perfil</label>
                 </div>
-                
+
                 <div class="row">
                 
                 <div class="col">
@@ -20,6 +20,10 @@
 
                 <div class="col">
                 <input type="text" name="nombre" placeholder="Nombre Usuario">
+                </div>
+
+                <div class="col">
+                    
                 </div>
 
                 </div>
