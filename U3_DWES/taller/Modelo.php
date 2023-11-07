@@ -35,6 +35,39 @@ class Modelo{
         return $resultado;
     }
 
+    function obtenerUsuarioDni(string $dni){
+        $resultado = array();
+        try{
+            $datos = $this->conexion->query("select * from wherw dni = ?");
+        
+            while ($fila=$datos->fetch()) {
+                $u = new Usuario($fila['id'],$fila['dni']
+                ,$fila['nombre'],$fila['perfil']);
+            }
+            }catch(PDOException $e){
+                echo $e->getMessage();
+    
+            }
+        return $resultado;
+    }
+
+    function crearUsuario(Usuario $u){
+        $resultado = false;
+        try {
+            $consulta = $this->conexion->prepare('insert into usuarios values(default,?,?,sha2(?,512),?');
+            $params = array($u->getDni(),$u->getNombre(),$u->getDni(),$u->getPerfil());
+            if($consulta->execute($params)){
+                if($consulta->rowCount()==1){
+                    //Recuperar el autonúmerico en insert
+                    $u ->setId($this->conexion->lastInsertId());
+                }
+            }
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     function obtenerUsuario(string $us, string $ps){
         $resultado = null;
         try {
