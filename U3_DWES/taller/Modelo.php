@@ -60,6 +60,7 @@ class Modelo{
                 if($consulta->rowCount()==1){
                     //Recuperar el autonúmerico en insert
                     $u ->setId($this->conexion->lastInsertId());
+                    $resultado = true;
                 }
             }
 
