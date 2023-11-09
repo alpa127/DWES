@@ -4,6 +4,15 @@ $bd = new Modelo();
 if ($bd->getConexion() == null) {
     $mensaje = array('e', 'Error, no hay conexión con la bd');
 } else {
+    //Chequear el perfil del usuario
+    session_start();
+    if(isset($_SESSION['usuario']) and ($_SESSION['usuario']->getPerfil() !='A' and $_SESSION['usuario']->getPerfil() !='M')){
+
+    
+        header('location:../usuario/login.php');
+    }
+    //Cerrar Sesion
+    session_write_close();
     //Botón crear
     if (isset($_POST['crear'])) {
         //Comprobar que todos los campos están rellenos
@@ -109,7 +118,7 @@ if ($bd->getConexion() == null) {
     </section>
     <section>
         <!-- Visulzar Piezas -->
-        <?php include_once 'listarPiezas.php' ?>
+        <?php include_once 'listarPieza.php' ?>
     </section>
     <footer>
 

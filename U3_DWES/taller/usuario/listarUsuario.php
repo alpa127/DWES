@@ -82,7 +82,7 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                       Estas seguro que desea borrar el usuario?
+                       Estas seguro que desea borrar el usuario <?php echo $u->getDni(), '-',$u->getNombre();?>?
                     </div>
 
                   <!-- Modal footer -->

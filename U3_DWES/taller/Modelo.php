@@ -1,5 +1,5 @@
 <?php
-
+    require_once 'usuario/Usuario.php';
     require_once 'pieza/Pieza.php';
 
 class Modelo{
@@ -50,6 +50,28 @@ class Modelo{
             }
         return $resultado;
     }
+
+    function obtenerUsuarioId(int $id){
+        $resultado = null;
+        try{
+            $consulta = $this->conexion->prepare("select * from wherw id = ?");
+            $params = array($id);
+
+            if($consulta->execute($params)){
+                if($fila=$consulta->fetch()){
+                $resultado = new Usuario($fila['id'],$fila['dni']
+                ,$fila['nombre'],$fila['perfil']);
+                }
+            }
+                
+            
+            }catch(PDOException $e){
+                echo $e->getMessage();
+    
+            }
+        return $resultado;
+    }
+
 
     function crearUsuario(Usuario $u){
         $resultado = false;
@@ -105,12 +127,53 @@ class Modelo{
             echo $e->getMessage();
         }
     }
+
+
+    function existenReparacionesusuario(int $id){
+        $resultado=false;
+        try{
+            $consulta = $this->conexion->prepare("select * from reparacion 
+            where usuario = ?");
+            $parametros = array($id);
+            if($consulta->execute($parametros)){
+                //Comprobar si se ha borrado al menos 1 registro
+                //En ese caso, ponemos resultado = true
+                if($consulta->rowCount()==1){
+                    $resultado=true;
+                }
+            }
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        return $resultado;
+    }
+
     function existenReparaciones(string $codigo){
         $resultado=false;
         try{
             $consulta = $this->conexion->prepare("delect * from piezareparacion 
             where pieza = ?");
             $parametros = array($codigo);
+            if($consulta->execute($parametros)){
+                //Comprobar si se ha borrado al menos 1 registro
+                //En ese caso, ponemos resultado = true
+                if($consulta->rowCount()==1){
+                    $resultado=true;
+                }
+            }
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+        }
+        return $resultado;
+    }
+
+    function borrarUsuario(int $id){
+        $resultado=false;
+        try{
+            $consulta = $this->conexion->prepare("delete from pieza where codigo = ? ");
+            $parametros = array($id);
             if($consulta->execute($parametros)){
                 //Comprobar si se ha borrado al menos 1 registro
                 //En ese caso, ponemos resultado = true

@@ -12,7 +12,7 @@
   }
   else{
     //Redirigir a login
-    header('location:..usuario/login.php');
+    header('location:../usuario/login.php');
   }
 
    ?>

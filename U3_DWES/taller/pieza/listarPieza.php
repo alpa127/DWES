@@ -56,8 +56,8 @@
                     echo '<td>'.$p->getPrecio().'</td>';
                     echo '<td>'.$p->getStock().'</td>';
                     echo '<td>';
-                    echo '<button class="btn btn-outline-dark" name="modif" value="'.$p->getCodigo().'"><img src="../icon/modif25.png"/></button>';
-                    echo '<button class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-tager="#a'.$p->getCodigo().'"><img src="../icon/delete25.png"/></button>';
+                    echo '<button class="btn btn-outline-dark" name="modif" value="'.$p->getCodigo().'"><img src="../icons/modif25.png"/></button>';
+                    echo '<button class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-tager="#a'.$p->getCodigo().'"><img src="../icons/delete25.png"/></button>';
                     echo '</td>';
                     }
                     echo '</tr>';
