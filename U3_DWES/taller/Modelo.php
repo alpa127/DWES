@@ -20,6 +20,21 @@ class Modelo{
         }
     }
 
+    function modificarUsuario(Usuario $u){
+        $resultado = false;
+        try {
+           $consulta = $this->conexion->prepare('UPDATE usuarios set dni=?, nombre=?, perfil=? where id=?');
+           $params= array($u->getDni(),$u->getNombre(),$u->getPerfil(),$u->getId());
+           if($consulta->execute($params)){
+            if($consulta->rowCount()==1){
+                $resultado=true;
+            }
+           }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     function obtenerUsuarios(){
         $resultado = array();
         try{

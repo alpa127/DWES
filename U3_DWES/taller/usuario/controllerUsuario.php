@@ -35,7 +35,20 @@ if ($bd->getConexion() == null) {
                 //Chequear que si se modifica el dni no existe el nuevo
                 if($_POST['dni']!=$u->getDni()){
                     if($bd->obtenerUsuarioDni($_POST['dni']) != null){
+                        $existeDNI = true;
                         $mensaje = array('e', 'Error, dni ya existe');
+                    }
+                }
+                if(!isset($existeDNI)){
+                    //Cambiar datos del usuario por los formularios
+                    //Todos menos el id
+                    $u->setDni($_POST['dni']);
+                    $u->setnombre($_POST['nombre']);
+                    $u->setPerfil($_POST['perfil']);
+                    if($bd->modificarUsuario($u)){
+                        $mensaje = array('i','Usuario Modificado');
+                    }else{
+                        $mensaje = array('e','Error al modificar el usuario');
                     }
                 }
             }else{
