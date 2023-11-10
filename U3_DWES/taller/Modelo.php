@@ -1,6 +1,7 @@
 <?php
     require_once 'usuario/Usuario.php';
     require_once 'pieza/Pieza.php';
+    require_once 'vehiculo/Propietario.php';
 
 class Modelo{
     private $conexion;
@@ -18,6 +19,26 @@ class Modelo{
             echo $e->getMessage();
 
         }
+    }
+
+    function obtenerPropietarios(){
+        $resultado = array();
+        try{
+            $datos = $this->conexion->query('select * from propietario order by nombre');
+            while($fila=$datos->fetch()){
+                $p = new Propietario(
+                    $fila[0],
+                    $fila[1],
+                    $fila[2],
+                    $fila[3],
+                    $fila[4]);
+                $resultado[]=$p;
+            }
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+
+        return $resultado;
     }
 
     function modificarUsuario(Usuario $u){
