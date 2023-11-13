@@ -33,13 +33,10 @@
                 <input type="text" name="dni" placeholder="012345678A" maxlength="9" />
             </div>
             <div class="col">
-                <input type="text" name="nombre" placeholder="Nombre Usuario" />
+                <input type="text" name="matricula" placeholder="1234-AAA" pattern="[0-9]{4}[A-Z]{3}" />
             </div>
             <div class="col">
-                <select name="perfil" class="form-select form-select-sm">
-                    <option value="A">Administrador</option>
-                    <option value="M">Mecánico</option>
-                </select>
+            <input type="color" name="colot"/>
             </div>
             <div class="col">
                 <input type="submit" name="crear" value="Crear" class="btn btn-outline-dark" />
@@ -49,7 +46,7 @@
     </form>
 </div>
  <!-- The Modal -->
- <div class="modal" id="a<?php echo $u->getDni(), $u->getNombre(); ?>">
+ <div class="modal" id="crearPropietario">
        <div class="modal-dialog">
                <div class="modal-content">
                  <!-- Modal Header -->
@@ -57,11 +54,12 @@
                     <h4 class="modal-title">Nuevo Propietario</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form action="#" method="post"></form>
+                <form action="#" method="post">
                  <!-- Modal body -->
                 <div class="modal-body">
                 <label for="dni">DNI</label>
                 <input type="text" name="dni" placeholder="11111111A"/>
+                
                 <br>
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" placeholder="nombre"/>
@@ -75,8 +73,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="submit" name="insertP" value="insertP" data-bs-dismiss="modal">Borrar</button>
-                    <button type="submit" name="insertP" value="insertP" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" name="insertP" value="insertP" data-bs-dismiss="modal">Crear</button>
+                    <button type="button" name="cancerlar" value="cancelar" data-bs-dismiss="modal">Cancelar</button>
                 </div>
                 </form>
             </div>
