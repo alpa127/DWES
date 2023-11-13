@@ -2,6 +2,7 @@
     require_once 'usuario/Usuario.php';
     require_once 'pieza/Pieza.php';
     require_once 'vehiculo/Propietario.php';
+    require_once 'vehiculo/Vehiculo.php';
 
 class Modelo{
     private $conexion;
@@ -19,6 +20,47 @@ class Modelo{
             echo $e->getMessage();
 
         }
+    }
+
+    function crearVehiculo(Vehiculo $v){
+        $resultado = null;
+        try {
+            $consulta = $this->conexion->prepare('INSERT into vehiculo values(default,?,?,?)');
+            $params = array($v->getPropietario(),$v->getMatricula(),$v->getColor());
+            if($consulta->execute($params)){
+            if($consulta->rowCount()==1){
+                $resultado=true;
+                $v->setCodigo($this->conexion->lastInsertId());
+            }
+                
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $resultado;
+    }
+
+    function obtenerVehiculo($m){
+        $resultado = null;
+        try {
+            $consulta = $this->conexion->prepare('SELECT * FROM vehiculo WHERE matricula = ?');
+            $params = array($m);
+            if($consulta->execute($params)){
+                if($fila=$consulta->fetch()){
+                    $resultado = new Vehiculo(
+                        $fila['codigo'],
+                        $fila['propietario'],
+                        $fila['matricula'],
+                        $fila['color']
+                    );
+                }
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $resultado;
     }
 
     function crearPropietario(Propietario $p){

@@ -13,15 +13,27 @@ if ($bd->getConexion() == null) {
     //Botón crear
     
     if (isset($_POST['crear'])) {
-        if (empty($_POST['dni']) or empty($_POST['nombre']) or empty($_POST['perfil'])) {
+        if(empty($_POST['propietario']) or empty($_POST['matricula']) or empty($_POST['color'])){
             $mensaje = array('e', 'Debe rellenar todos los campos');
-        } else {
-          
+        }else{
+            //Comprobar que no existe otro vehiculo con la misma matricula
+            $v = $bd->obtenerVehiculo($_POST['matricula']);
+            if($v==null){
+                //Crear Vehiculo
+                $v = new Vehiculo(0,$_POST['propietario'],$_POST['matricula'],$_POST['color']);
+                if($bd->crearVehiculo($v)){
+                    $mensaje = array('i','Vehiculo Creado');
+                }else{
+                    $mensaje = array('e', 'Se ha producido un error al crear el vehiculo');
+                }
+            }else{
+                $mensaje = array('e','Error,ya existe un vehiculo con esa matricula');
+            }
         }
         
+        
 
-    } elseif (isset($_POST['insertP'])) {
-       
+    } elseif (isset($_POST['insertP'])) {   
         if(empty($_POST['dni']) or empty($_POST['telefono']) or empty($_POST['nombre'])){
             $mensaje = array('e', 'Debe rellenar todos los campos');
         }else{
