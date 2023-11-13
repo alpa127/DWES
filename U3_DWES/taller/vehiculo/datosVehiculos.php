@@ -9,25 +9,24 @@ function marcarOptionSeleccionado($option, $optionSeleccionado)
 <div class="container p-2 my-2 border">
     <!-- Mostrar usuarios y dar opción a modificar y borrar -->
     <?php
-    if ($bd->getConexion() != null) {
-        //Obtener piezas
-        $usuarios = $bd->obtenerUsuarios();
-        //Mostramos las piezas en una tabla
+    if (isset($vehiculos)) {
+       
+        //Mostramos los vehiculos en una tabla
     ?>
         <form action="#" method="post">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>DNI</th>
-                        <th>Nombre</th>
-                        <th>Perfil</th>
-                        <th>Acciones</th>
+                        <th>Codigo</th>
+                        <th>Propietario</th>
+                        <th>Matricula</th>
+                        <th>Color</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($usuarios as $u) {
+                    foreach ($vehiculos as $v) {
                         echo '<tr>';
                         if (isset($_POST['modif']) and $_POST['modif'] == $u->getId()) {
                             //Pintar campos para poder modificar
