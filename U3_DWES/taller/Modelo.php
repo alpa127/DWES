@@ -63,6 +63,30 @@ class Modelo{
         return $resultado;
     }
 
+    function obtenerVehiculos($codigoP){
+        $resultado = array();
+        try {
+            $consulta = $this->conexion->prepare('SELECT * FROM vehiculo WHERE matricula = ?');
+            $params = array($codigoP);
+            if($consulta->execute($params)){
+                if($fila=$consulta->fetch()){
+                    $v = new Vehiculo(
+                        $fila['codigo'],
+                        $fila['propietario'],
+                        $fila['matricula'],
+                        $fila['color']
+                    );
+                    //Añadir el vehiculo al array resultado
+                    $resultado[]=$v;
+                }
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $resultado;
+    }
+
     function crearPropietario(Propietario $p){
         $resultado = null;
         try {
