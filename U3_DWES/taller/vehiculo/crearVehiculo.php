@@ -29,14 +29,12 @@
                 data-bs-toggle="modal"
                 data-bs-target="#crearPropietario">+</button>
             </div>
+          
             <div class="col">
-                <input type="text" name="dni" placeholder="012345678A" maxlength="9" />
+                <input type="text" name="matricula" placeholder="1234AAA" pattern="[0-9]{4}[A-Z]{3}" />
             </div>
             <div class="col">
-                <input type="text" name="matricula" placeholder="1234-AAA" pattern="[0-9]{4}[A-Z]{3}" />
-            </div>
-            <div class="col">
-            <input type="color" name="colot"/>
+            <input type="color" name="color"/>
             </div>
             <div class="col">
                 <input type="submit" name="crear" value="Crear" class="btn btn-outline-dark" />
