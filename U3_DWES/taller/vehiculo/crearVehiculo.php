@@ -26,7 +26,7 @@
                 ?>
                 </select>
                 <button type="button" name="crearP" class="btn btn-outline-dark"
-                data-bs-togglr="modal"
+                data-bs-toggle="modal"
                 data-bs-target="#crearPropietario">+</button>
             </div>
             <div class="col">
@@ -76,6 +76,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <button type="submit" name="insertP" value="insertP" data-bs-dismiss="modal">Borrar</button>
+                    <button type="submit" name="insertP" value="insertP" data-bs-dismiss="modal">Cancelar</button>
                 </div>
                 </form>
             </div>
