@@ -35,7 +35,6 @@
                             echo '</td>';
                         } else {
                             echo '<td>' . $v->getCodigo() . '</td>';
-                
                             echo '<td>' . $v->getMatricula() . '</td>';
                             echo '<td><input type="color" name="color" disabled="disabled" value="' . $v->getColor() . '"/></td>';
                             echo '<td>';
