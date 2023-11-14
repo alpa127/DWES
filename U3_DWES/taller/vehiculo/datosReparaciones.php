@@ -10,17 +10,20 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Codigo</th>
-                       
-                        <th>Matricula</th>
-                        <th>Color</th>
+                        <th>Id</th>
+                        <th>Fecha</th>
+                        <th>HorasTaller</th>
+                        <th>Pagado</th>
+                        <th>Usuario</th>
+                        <th>PrecioHora</th>
+                        <th>Acciones</th>
                        
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                    
-                    foreach ($vehiculos as $v) {
+                    foreach ($reparaciones as $r) {
                         echo '<tr>';
                         if (isset($_POST['modif']) and $_POST['modif'] == $v->getCodigo()) {
                             //Pintar campos para poder modificar
