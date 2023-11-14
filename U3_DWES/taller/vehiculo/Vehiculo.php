@@ -11,6 +11,9 @@
                 $matricula= "";
             }
             $this->matricula=$matricula;
+            if($color == null){
+                $color= "";
+            }
             $this->color=$color;    
         }
 
