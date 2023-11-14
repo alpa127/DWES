@@ -2,8 +2,8 @@
 <div class="container p-2 my-2 border">
     <!-- Mostrar usuarios y dar opción a modificar y borrar -->
     <?php
-    if (isset($_SESSION['propietario'])) {
-        $vehiculos = $bd->obtenerVehiculos($_SESSION['propietario']);
+    if (isset($_SESSION['vehiculo'])) {
+        $vehiculos = $bd->obtenerReparaciones($_SESSION['vehiculo']);
         //Mostramos los vehiculos en una tabla
     ?>
         <form action="#" method="post">

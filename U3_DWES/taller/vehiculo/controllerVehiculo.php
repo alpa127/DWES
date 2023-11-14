@@ -57,7 +57,9 @@ if ($bd->getConexion() == null) {
         //Crear una variable de sesion con el propietario
         $_SESSION['propietario'] = $_POST['propietario'];
        
-       
+    } elseif (isset($_POST['mostrarV'])) {
+
+        $_SESSION['vehiculo'] = $_POST['mostrarR'];
        
     } elseif (isset($_POST['borrar'])) {
      
