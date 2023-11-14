@@ -99,7 +99,7 @@ if ($bd->getConexion() == null) {
     </section>
     <section>
         <!-- Seleccionar / Visualizar datos de reparaciones -->
-        <?php include_once 'datosReparaciones.php' ?>
+        <?php include_once '../reparacion/datosReparaciones.php' ?>
     </section>
     <footer>
 
