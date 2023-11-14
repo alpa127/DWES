@@ -11,7 +11,7 @@
                 <thead>
                     <tr>
                         <th>Codigo</th>
-                        <th>Propietario</th>
+                       
                         <th>Matricula</th>
                         <th>Color</th>
                        
@@ -25,7 +25,6 @@
                         if (isset($_POST['modif']) and $_POST['modif'] == $v->getCodigo()) {
                             //Pintar campos para poder modificar
                             echo '<td> <input type="text" name="codigo" disabled="disabled" value="' . $v->getCodigo() . '"/></td>';
-                            echo '<td> <input type="text" name="propietario" disabled="disabled" value="' . $v->getPropietario() . '"/></td>';
                             echo '<td> <input type="text" name="matricula" value="' . $v->getMatricula() . '"/></td>';
                             echo '<td> <input type="color" name="color" value="' . $v->getColor() . '"/></td>';
                             echo '<button type="submit" class="btn btn-outline-dark" name="update" value="' . $v->getCodigo() . '">Guardar</button>';
@@ -33,7 +32,7 @@
                             echo '</td>';
                         } else {
                             echo '<td>' . $v->getCodigo() . '</td>';
-                            echo '<td>' . $v->getPropietario() . '</td>';
+                
                             echo '<td>' . $v->getMatricula() . '</td>';
                             echo '<td><input type="color" name="color" disabled="disabled" value="' . $v->getColor() . '"/></td>';
                             echo '<td>';
