@@ -9,7 +9,7 @@ if ($bd->getConexion() == null) {
      if(isset($_SESSION['usuario']) and ($_SESSION['usuario']->getPerfil() !='A' and $_SESSION['usuario']->getPerfil() !='M')){
          header('location:../usuario/login.php');
      }
-     session_write_close();
+    
     //Botón crear
     
     if (isset($_POST['crear'])) {
@@ -54,12 +54,15 @@ if ($bd->getConexion() == null) {
         }
 
     } elseif (isset($_POST['mostrarV'])) {
-        $vehiculos = $bd->obtenerVehiculos($_POST['propietario']);
+        //Crear una variable de sesion con el propietario
+        $_SESSION['propietario'] = $_POST['propietario'];
+       
        
        
     } elseif (isset($_POST['borrar'])) {
      
     }
+    session_write_close();
 }
 ?>
 <!DOCTYPE html>

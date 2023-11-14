@@ -9,8 +9,8 @@ function marcarOptionSeleccionado($option, $optionSeleccionado)
 <div class="container p-2 my-2 border">
     <!-- Mostrar usuarios y dar opción a modificar y borrar -->
     <?php
-    if (isset($vehiculos)) {
-       
+    if (isset($_SESSION['propietario'])) {
+        $vehiculos = $bd->obtenerVehiculos($_SESSION['propietario']);
         //Mostramos los vehiculos en una tabla
     ?>
         <form action="#" method="post">
@@ -26,7 +26,7 @@ function marcarOptionSeleccionado($option, $optionSeleccionado)
                 </thead>
                 <tbody>
                     <?php
-                    echo sizeof($vehiculos);
+                   
                     foreach ($vehiculos as $v) {
                         echo '<tr>';
                         if (isset($_POST['modif']) and $_POST['modif'] == $v->getCodigo()) {
@@ -34,7 +34,7 @@ function marcarOptionSeleccionado($option, $optionSeleccionado)
                             echo '<td> <input type="text" name="codigo" disabled="disabled" value="' . $v->getCodigo() . '"/></td>';
                             echo '<td> <input type="text" name="propietario" disabled="disabled" value="' . $v->getPropietario() . '"/></td>';
                             echo '<td> <input type="text" name="matricula" value="' . $v->getMatricula() . '"/></td>';
-                            echo '<td> <input type="text" name="color" value="' . $v->getColor() . '"/></td>';
+                            echo '<td> <input type="color" name="color" value="' . $v->getColor() . '"/></td>';
                             echo '<button type="submit" class="btn btn-outline-dark" name="update" value="' . $v->getCodigo() . '">Guardar</button>';
                             echo '<button type="submit" class="btn btn-outline-dark" name="cancelar">Cancelar</button>';
                             echo '</td>';
