@@ -7,6 +7,9 @@
         {
             $this->codigo=$codigo;
             $this->propietario=$propietario;
+            if($matricula == null){
+                $matricula= "";
+            }
             $this->matricula=$matricula;
             $this->color=$color;    
         }

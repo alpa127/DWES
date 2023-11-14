@@ -56,6 +56,7 @@ if ($bd->getConexion() == null) {
     } elseif (isset($_POST['mostrarV'])) {
         $vehiculos = $bd->obtenerVehiculos($_POST['propietario']);
        
+       
     } elseif (isset($_POST['borrar'])) {
      
     }

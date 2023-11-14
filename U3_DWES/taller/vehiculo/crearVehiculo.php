@@ -1,6 +1,6 @@
 <div class="container p-2 my-2 border">
     <!-- Crear Pieza -->
-    <form action="#" method="post">
+    <form action="" method="post">
         <div class="row">
             <div class="col">
                 <label>Propietarios</label>

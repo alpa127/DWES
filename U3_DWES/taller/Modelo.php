@@ -66,7 +66,7 @@ class Modelo{
     function obtenerVehiculos($codigoP){
         $resultado = array();
         try {
-            $consulta = $this->conexion->prepare('SELECT * FROM vehiculo WHERE matricula = ?');
+            $consulta = $this->conexion->prepare('SELECT * FROM vehiculo WHERE propietario = ?');
             $params = array($codigoP);
             if($consulta->execute($params)){
                 if($fila=$consulta->fetch()){
