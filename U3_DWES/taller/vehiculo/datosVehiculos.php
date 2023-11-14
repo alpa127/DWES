@@ -1,11 +1,4 @@
-<?php
-function marcarOptionSeleccionado($option, $optionSeleccionado)
-{
-    if ($option == $optionSeleccionado) {
-        return 'selected="selected"';
-    }
-}
-?>
+
 <div class="container p-2 my-2 border">
     <!-- Mostrar usuarios y dar opción a modificar y borrar -->
     <?php
