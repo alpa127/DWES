@@ -32,6 +32,7 @@ class Modelo
             if ($consulta->execute($params)) {
                 if ($consulta->rowCount() == 1) {
                     $resultado = true;
+                    $r->setId($this->conexion->lastInsertId());
                 }
             }
         } catch (PDOException $e) {

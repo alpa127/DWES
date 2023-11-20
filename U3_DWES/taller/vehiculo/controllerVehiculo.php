@@ -62,6 +62,8 @@ if ($bd->getConexion() == null) {
     } elseif (isset($_POST['mostrarV'])) {
         //Crear una variable de sesión con el propietario
         $_SESSION['propietario'] = $_POST['propietario'];
+        //Limpiamos el vehículo seleccionado de las sesión
+        unset($_SESSION['vehiculo']);
     } elseif (isset($_POST["mostrarR"])) {
         $_SESSION['vehiculo'] = $_POST['mostrarR'];
     } elseif (isset($_POST['borrar'])) {
