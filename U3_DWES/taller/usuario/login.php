@@ -7,7 +7,7 @@ if($bd->getConexion()==null){
     if(isset($_POST['login'])){
         //Chequear que vienen rellenos us y ps
         if(empty($_POST['us']) or empty($_POST['ps'])){
-            $mensaje=array(0, 'DEbes rellenar usuario y contraseña');
+            $mensaje=array(0, 'Debes rellenar usuario y contraseña');
         }else{
             //Comprobar que us y ps son correctos
             $usuario= $bd->obtenerUsuario($_POST['us'],$_POST['ps']);
