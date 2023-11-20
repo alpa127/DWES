@@ -11,7 +11,7 @@ class Modelo
 
     const URL = 'mysql:host=localhost;port=3307;dbname=taller';
     const USUARIO = 'root';
-    const PS = 'root';
+    const PS = '12345';
 
     function __construct()
     {
