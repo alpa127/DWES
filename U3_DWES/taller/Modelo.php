@@ -22,6 +22,21 @@ class Modelo
             echo $e->getMessage();
         }
     }
+    function modificarReparacion(int $id,float $horas,bool $pagado,float $precioH){
+        try {
+            $consulta = $this->conexion->prepare('update reparacion ser tiempo=?, 
+            pagado=?,precioH=? where id = ?');
+            $params = array($horas,$pagado,$precioH,$id);
+            if($consulta->execute($params)){
+                if($consulta->rowCount()==1){
+                    return true;
+                }
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
     function crearReparacion(Reparacion $r)
     {
         $resultado = false;
