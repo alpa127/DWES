@@ -3,7 +3,7 @@
     
         <form action="" method="post">
             <label>Código Reparación:<?php echo $r->getId()?></label>
-            <label>Matrícula:<?php echo $r->getMatricula()?></label>
+            <label>Matrícula:<?php echo $r->getCoche()?></label>
             <label>Fecha:<?php echo $r->getFecha()?></label>
             <label>Tiempo:<?php echo $r->getTiempo()?></label>
             <label>Pagado:<?php echo $r->getPagado()?></label>
