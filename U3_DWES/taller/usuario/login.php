@@ -19,7 +19,7 @@ if ($bd->getConexion() == null) {
                 //Guardar el usuario en la sesión y redirigir a la página
                 //que queramos que sea la de entrada ¡¡CAMBIAR!!                
                 $_SESSION['usuario'] = $usuario;
-                header('location:../pieza/controllerPieza.php');
+                header('location:../vehiculo/controllerVehiculo.php');
             }
         }
     } elseif (isset($_GET['accion']) and $_GET['accion'] == 'cerrar') {
