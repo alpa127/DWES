@@ -64,8 +64,12 @@ if ($bd->getConexion() == null) {
         $_SESSION['propietario'] = $_POST['propietario'];
         //Limpiamos el vehículo seleccionado de las sesión
         unset($_SESSION['vehiculo']);
+        unset($_SESSION['reparacion']);
     } elseif (isset($_POST["mostrarR"])) {
         $_SESSION['vehiculo'] = $_POST['mostrarR'];
+    } elseif (isset($_POST["datosR"])) {
+        $_SESSION['reparacion'] = $_POST['datosR'];
+        header('location:controllerReparacion.php');
     } elseif (isset($_POST['updateR'])) {
         if($bd->modificarReparacion($_POST['updateR'],$_POST['horas'],(isset($_POST['pagado'])?true:false),$_POST['precioH'])){
                 $mensaje = array('i','Reparación modificada');

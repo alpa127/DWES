@@ -83,6 +83,33 @@ class Modelo
         }
         return $resultado;
     }
+    function obtenerReparacion($id)
+    {
+        $resultado = null;
+        try {
+            $consulta = $this->conexion->prepare(
+                "select * from reparacion where id = ?"
+            );
+            $params = array($id);
+            if ($consulta->execute($params)) {
+                if ($fila = $consulta->fetch()) {
+                    $resultado = new Reparacion(
+                        $fila["id"],
+                        $fila["coche"],
+                        $fila["fechaHora"],
+                        $fila["tiempo"],
+                        $fila["pagado"],
+                        $fila["usuario"],
+                        $fila["precioH"]
+                    );
+                    
+                }
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $resultado;
+    }
     function obtenerVehiculos($codigoP)
     {
         $resultado = array();
