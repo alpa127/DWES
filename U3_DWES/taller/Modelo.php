@@ -83,6 +83,7 @@ class Modelo
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+        return $resultado;
     }
     function modificarReparacion(int $id,float $horas,bool $pagado,float $precioH){
         try {
