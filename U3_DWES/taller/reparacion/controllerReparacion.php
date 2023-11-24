@@ -12,13 +12,37 @@ if ($bd->getConexion() == null) {
     ) {
         header('location:../usuario/login.php');
     }
-    if(isset($_SESSION['reparacion'])){
+    if(!isset($_SESSION['reparacion'])){
         header(('location:../vehiculo/controllerVehiculo.php'));
     }
     //Botón crear
-    if (isset($_POST['crear'])) {
+    if (isset($_POST['crearPR'])) {
        //Crear Pieza en reparación
-    
+        //Chequear que esten rellenos la pieza y la cantidad y que no sea negativa
+        if(empty($_POST['pieza']) or empty($_POST['cantidad']) or $_POST['cantidad']<1){
+            $mensaje = array('e', 'Error, hay que rellenar todos los datos y la cantidad debe ser +');
+        }else{
+             //Chequear que haya stock
+             $pieza = $bd->obtenerPieza($_POST['pieza']);
+             if($pieza->getStock()<$_POST['cantidad']){
+                $mensaje = array('e', 'Error, no hay stock suficiente');
+             }else{
+                //Si la pieza ya se ha usado en esa reparación
+                // hay que hacer un update en piezaReparacion e incrementar la cantidad
+                //Si no se ha usado, hqy que hacer un insertar piezaReparacion
+                 $pr = $bd->obtenerPiezaReparacion($_SESSION['reparacion'],$pieza->getCodigo());
+                 if($pr==null){
+                    //Insert
+                    if($bd->insertarPR($_SESSION['reparacion'],$pieza,$_POST['cantidad'])){
+                        $mensaje = array('e','Error al insertar la pieza');
+                    }
+                 }else{
+                    //Update
+                 }
+             }
+        }
+       
+     
      
     } elseif (isset($_POST['update'])) {
         //Modificar pieza en reparación
@@ -59,7 +83,7 @@ if ($bd->getConexion() == null) {
     </section>
     <section>
         <!-- Comunicar mensajes -->
-        <?php include_once '../crearPiezaR.php' ?>
+        <?php include_once '../reparacion/crearPiezaR.php' ?>
     </section>
     <section>
         <!-- Comunicar mensajes -->
@@ -67,7 +91,7 @@ if ($bd->getConexion() == null) {
     </section>
     <section>
         <!-- Seleccionar / Visulizar datos de vehículo -->
-        <?php include_once 'datosPieza.php' ?>
+        <?php include_once '../reparacion/datosPieza.php' ?>
     </section>
     
     <footer>
