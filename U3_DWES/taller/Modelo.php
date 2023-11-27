@@ -61,6 +61,43 @@ class Modelo
         }
     }
 
+    function modificarCantidad($pr,$nuevaCantidad){
+        try {
+          //Hay que hacer dos operaciones en la BD
+          //Un update en piezaReparacion
+          //Un update en pieza para actualizar el stock
+          //=>HAY QUE HACER UNA TRANSACCION PARA GARANTIZAR
+          //QUE SIEMPRE SE HACEN LAS DOS OPERACIONES O NINGUNA SI HAY ERROR
+          //Iniciar transaccion 
+          $this->conexion->beginTransaction();
+          $consulta=$this->conexion->prepare('update piezareparacion set 
+                            cantidad = ? 
+                            where reparacion = ? and pieza = ? ');
+          $params=array($nuevaCantidad,$pr->getR()->getId(),$pr->getP()->getCodigo());
+          if($consulta->execute($params)){
+                if($consulta->rowCount()==1){
+                    $consulta=$this->conexion->prepare('update pieza set stock = stock + ?-?
+                                                where codigo = ?');
+                    $params=array($pr->getCantidad(),$nuevaCantidad,$pr->getP()->getCodigo());
+                    if($consulta->execute($params)){
+                        if($consulta->rowCount()==1){
+                            $resultado = true;
+                            $this->conexion->commit();
+                        }else{
+                            $this->conexion->rollBack();
+                        }
+                    }else{
+                        $this->conexion->rollBack();
+                    }
+   
+                }
+          }
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            echo $e->getMessage();
+        }
+    }
+
     function insertarPR($idR,$pieza,$cantidad){
         try {
           //Hay que hacer dos operaciones en la BD
