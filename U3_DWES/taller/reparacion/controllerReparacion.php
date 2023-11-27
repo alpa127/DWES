@@ -34,10 +34,20 @@ if ($bd->getConexion() == null) {
                  if($pr==null){
                     //Insert
                     if($bd->insertarPR($_SESSION['reparacion'],$pieza,$_POST['cantidad'])){
-                        $mensaje = array('e','Error al insertar la pieza');
+                        $mensaje = array('i','Error al insertar la pieza');
                     }
+                    else{
+                        $mensaje = array('e','Error al insertar la pieza');
+                        }
                  }else{
                     //Update
+                    
+                    if($bd->modificarPR($_SESSION['reparacion'],$pieza,$_POST['cantidad'])){
+                        $mensaje = array('i','Pieza modificada');
+                    }
+                    else{
+                    $mensaje = array('e','Error al modificar la pieza');
+                    }
                  }
              }
         }
@@ -46,6 +56,17 @@ if ($bd->getConexion() == null) {
      
     } elseif (isset($_POST['update'])) {
         //Modificar pieza en reparación
+        //Obtener pieza a modificar
+        $pr = $bd->obtenerPiezaReparacion($_SESSION['reparacion'],$_POST['update']);
+        if($pr!=null){
+            if($bd->modificarCantidad($pr,$_POST['cantidad'])){
+                $mensaje = array('i', 'Pieza modificada');
+            }else{
+                $mensaje = array('e','Error no se ha modificado la pieza');
+            }
+        }else{
+            $mensaje = array('e','Error, no existe la pieza en la reparación');
+        }
     } elseif (isset($_POST['borrar'])) {
         //Borrar pieza en reparacion
     } 
@@ -78,12 +99,8 @@ if ($bd->getConexion() == null) {
         ?>
     </section>
     <section>
-        <!-- Crear Vehúculo -->
-        <?php include_once 'infoReparacion.php' ?>
-    </section>
-    <section>
         <!-- Comunicar mensajes -->
-        <?php include_once '../reparacion/crearPiezaR.php' ?>
+        <?php include_once 'crearPiezaR.php' ?>
     </section>
     <section>
         <!-- Comunicar mensajes -->
@@ -91,7 +108,7 @@ if ($bd->getConexion() == null) {
     </section>
     <section>
         <!-- Seleccionar / Visulizar datos de vehículo -->
-        <?php include_once '../reparacion/datosPieza.php' ?>
+        <?php include_once 'datosPiezas.php' ?>
     </section>
     
     <footer>
