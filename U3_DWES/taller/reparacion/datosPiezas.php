@@ -37,9 +37,9 @@
                     echo '<tr>';
                     if(isset($_POST['modif']) and $_POST['modif']==$pr->getP()->getCodigo()){
                         //Pintar campos para poder modificar
-                        echo '<td> <input type="text" name="codigo" disabled="disabled" value="" '.$pr->getP()->getCodigo().'"/></td>';
-                        echo '<td> <input type="text" name="clase" disabled="disabled" value="" '.$pr->getP()->getClase().'"/></td>';
-                        echo '<td> <input type="text" name="descripcion" disabled="disabled" value="" '.$pr->getP()->getDescripcion().'"/></td>';
+                        echo '<td> <input type="text" name="codigo" disabled="disabled" value="'.$pr->getP()->getCodigo().'"/></td>';
+                        echo '<td> <input type="text" name="clase" disabled="disabled" value="'.$pr->getP()->getClase().'"/></td>';
+                        echo '<td> <input type="text" name="descripcion" disabled="disabled" value="'.$pr->getP()->getDescripcion().'"/></td>';
                         echo '<td> <input type="number" name="cantidad" value="" '.$pr->getCantidad().'"/></td>';
                         echo '<td> <input type="number" name="precio" step="0.01" value="" '.$pr->getPrecio().'"/></td>';
                         echo '<td></td>';
