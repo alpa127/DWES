@@ -6,8 +6,9 @@ class Reparacion{
     private bool $pagado;
     private float $precioH;
     private int $usuario;
+    private float $importeTotal;
 
-    function __construct($id, $coche,$fecha,$tiempo,$pagado,$usuario,$precioH){
+    function __construct($id, $coche,$fecha,$tiempo,$pagado,$usuario,$precioH,$importeTotal){
         //Quitar nulos
         if($precioH==null){
             $precioH=0;
@@ -22,6 +23,7 @@ class Reparacion{
         $this->pagado=$pagado;
         $this->precioH=$precioH;
         $this->usuario=$usuario;
+        $this->importeTotal=$importeTotal;
     }
 
     
@@ -165,6 +167,26 @@ class Reparacion{
 
         return $this;
     }
+
+        /**
+         * Get the value of importeTotal
+         */ 
+        public function getImporteTotal()
+        {
+                return $this->importeTotal;
+        }
+
+        /**
+         * Set the value of importeTotal
+         *
+         * @return  self
+         */ 
+        public function setImporteTotal($importeTotal)
+        {
+                $this->importeTotal = $importeTotal;
+
+                return $this;
+        }
 }
 
 ?>

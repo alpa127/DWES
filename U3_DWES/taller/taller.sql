@@ -71,11 +71,12 @@ create table reparacion(
     usuario int not null,
     foreign key (coche) references vehiculo(codigo) on update cascade on delete restrict,
     foreign key (usuario) references usuarios(id) on update cascade on delete restrict,
-    precioH float null
+    precioH float null,
+    importeTotal float not null default 0
 )engine Innodb;
 
 
-INSERT INTO `reparacion` VALUES (1,1,'2020-08-25 15:01:00',2,1,1,null),
+INSERT INTO reparacion(id,coche,fechaHora,tiempo,pagado,usuario,precioH) VALUES (1,1,'2020-08-25 15:01:00',2,1,1,null),
 (2,2,'2022-03-25 05:28:00',12,1,1,null),(3,3,'2021-03-10 22:14:00',2,1,1,null),
 (4,4,'2020-10-07 20:07:00',2,1,1,null),(5,5,'2021-10-10 07:13:00',2,1,1,null),
 (6,1,'2020-06-19 02:22:00',2,1,1,null),(7,2,'2020-05-28 22:09:00',2,1,1,null),
