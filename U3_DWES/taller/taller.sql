@@ -98,7 +98,7 @@ INSERT INTO piezaReparacion(reparacion,pieza,importe) VALUES (1,'F1',7),(1,'O1',
 
 	
 delimiter //
-create function totalReparacion(pRep int) returns float deterministic
+create function pagarReparacion(pRep int) returns float deterministic
 begin
 	declare vImporte float default 0;
     declare tiempo float;
@@ -107,6 +107,9 @@ begin
 	 select sum(importe*cantidad) into vImporte
 				from piezaReparacion
                 where reparacion = pRep;
+		if(vImporte is null) then
+			set vImporte = 0;
+            end if;
 	-- Obtener el tiempo total de la repación y el precio por hora
     select tiempo, precioH 
 		into tiempo, precioH
@@ -115,6 +118,8 @@ begin
 	if(tiempo is not null and precioH is not null) then
 		set vImporte = vImporte + (tiempo * precioH);
     end if;
+    -- Actualizar el importe total en la reparación
+    update reparacion set importeTotal = vImporte, pagado=true where id = pRep;
 	return vImporte;
 end//
 
@@ -123,3 +128,12 @@ begin
 	select v.nombrepropietario, v.matricula, r.fechaHora, r.tiempo, totalReparacion(r.id)  from reparacion r inner join vehiculo v on r.coche = v.codigo where v.nombrePropietario like concat('%',pPropietario,'%');
 end//
 
+create procedure generarFactura(pidRep int, out pHoras float, out precioH float)
+begin
+	-- Devuelve en los parametros de salida los datos de la mano de obra
+	select tiempo, precioH
+    into pHoras, precioH from reparacion where id = pIdRep;
+    -- Detalle de pieza
+	select descripcion,importe,cantidad,importe*cantidad from  piezareparacion inner join  pieza on pieza = codigo
+    where reparacion = pIdRep;
+end//
