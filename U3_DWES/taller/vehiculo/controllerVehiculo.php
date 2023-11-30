@@ -1,5 +1,6 @@
 <?php
 require_once '../Modelo.php';
+require_once '../correo.php';
 $bd = new Modelo();
 if ($bd->getConexion() == null) {
     $mensaje = array('e', 'Error, no hay conexión con la bd');
@@ -173,7 +174,7 @@ if ($bd->getConexion() == null) {
         if($r!=null and $r->getPagado()){
             $detalle = $bd->obtenerDetalleReparacion($r->getId());
             var_dump($detalle);
-            //enviarCorreo($r,$detalle);
+            enviarCorreo($r,$detalle);
         }else{
             $mensaje = array('e', 'Reparación no existe o no esta pagada');
         }
