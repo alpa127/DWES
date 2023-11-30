@@ -164,7 +164,18 @@ if ($bd->getConexion() == null) {
         }
     }elseif (isset($_POST['pagarR'])){
         if($bd->$pagarR($_POST['pagarR'])){
+            $mensaje = array('i', 'Reparación pagada');
+        }else{
             $mensaje = array('e', 'Se ha producido un error al pagar la reparación');
+        }
+    }elseif(isset($_POST['enviarR'])){
+        $r = $bd->obtenerReparacion($_POST['enviarR']);
+        if($r!=null and $r->getPagado()){
+            $detalle = $bd->obtenerDetalleReparacion($r->getId());
+            var_dump($detalle);
+            //enviarCorreo($r,$detalle);
+        }else{
+            $mensaje = array('e', 'Reparación no existe o no esta pagada');
         }
     }
     session_write_close();

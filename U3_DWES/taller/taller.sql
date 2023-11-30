@@ -131,8 +131,8 @@ end//
 create procedure generarFactura(pidRep int, out pHoras float, out precioH float)
 begin
 	-- Devuelve en los parametros de salida los datos de la mano de obra
-	select tiempo, precioH
-    into pHoras, precioH from reparacion where id = pIdRep;
+	select 'Mano de Obra' as descripcion ,precioH as importe , tiempo as cantidad , precioH*tiempo as total
+    from reparacion where id = pIdRep;
     -- Detalle de pieza
 	select descripcion,importe,cantidad,importe*cantidad from  piezareparacion inner join  pieza on pieza = codigo
     where reparacion = pIdRep;
