@@ -14,6 +14,7 @@
             $correo->Host = 'smtp.gmail.com';
             $correo->SMTPAuth = true;
             $correo->Username= 'apachonc05@educarex.es';
+            $correo->Password = 'humwvvrkofdpumkd';
         }
        
 
