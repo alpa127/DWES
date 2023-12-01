@@ -34,7 +34,7 @@ class Modelo
                 if ($fila = $consulta->fetch()) {
                     $resultado = new Propietario(
                         $fila['codigo'],
-                        $fila['id'],
+                        $fila['dni'],
                         $fila['nombre'],
                         $fila['telefono'],
                         $fila['email']
@@ -49,6 +49,8 @@ class Modelo
     }
 
     function obtenerDetalleReparacion($idR){
+
+        $resultado = array();
         try {
             $consulta = $this->conexion->prepare('call generarFactura(?)');
             $params=array($idR);
@@ -58,7 +60,7 @@ class Modelo
                     $resultado[]=array('Concepto'=>$fila['descripcion'],
                                         'Cantidad'=>$fila['cantidad'],
                                         'Importe'=> $fila['importe'],
-                                        'Total'=>$fila['total']);
+                                        'Total'=>$fila['Total']);
                 }
                 //Recuperar el resultado del select de piezareparacion
                 $consulta->nextRowset();
@@ -66,7 +68,7 @@ class Modelo
                     $resultado[]=array('Concepto'=>$fila['descripcion'],
                                         'Cantidad'=>$fila['cantidad'],
                                         'Importe'=> $fila['importe'],
-                                        'Total'=>$fila['total']);
+                                        'Total'=>$fila['Total']);
                 }
             }
         } catch (PDOException $e) {
@@ -76,14 +78,14 @@ class Modelo
     }
 
     function pagarR($idR){
+        $resultado = false;
         try {
             //Ejecucion de funcion
-            $consulta = $this->conexion->prepare('select paraReparacion(?)');
+            $consulta = $this->conexion->prepare('select pagarReparacion(?) as total');
             $params= array($idR);
             if($consulta->execute($params)){
                 if($fila=$consulta->fetch()){
-                    return true;
-
+                    $resultado = true;
                     $total = $fila['total'];
                 }
 
@@ -91,6 +93,7 @@ class Modelo
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+        return $resultado;
     }
     function borrarPiezaRep($pr){
         $resultado = false;

@@ -95,14 +95,14 @@ create table piezaReparacion(
 INSERT INTO piezaReparacion(reparacion,pieza,importe) VALUES (1,'F1',7),(1,'O1',15),(2,'F2',15),(2,'O1',15),(2,'F3',70),(3,'O1',15),(3,'R1',7),(4,'O1',15),(4,'R2',35),(5,'F3',13),(5,'O1',15),
 (6,'M1',23),(6,'O1',15),(7,'R1',15),(7,'F3',70),(8,'O2',12),(8,'M1',15),(9,'O1',15),(10,'O1',15),(11,'M1',15),(11,'O2',35),(12,'F2',15),(12,'O1',15);    
 
-
+update propietario set email = 'apachonc05@educarex.es';
 	
 delimiter //
 create function pagarReparacion(pRep int) returns float deterministic
 begin
 	declare vImporte float default 0;
-    declare tiempo float;
-    declare precioH float;
+    declare vtiempo float;
+    declare vprecioH float;
     
 	 select sum(importe*cantidad) into vImporte
 				from piezaReparacion
@@ -112,11 +112,11 @@ begin
             end if;
 	-- Obtener el tiempo total de la repación y el precio por hora
     select tiempo, precioH 
-		into tiempo, precioH
+		into vtiempo, vprecioH
 		from reparacion
 		where id = pRep;
-	if(tiempo is not null and precioH is not null) then
-		set vImporte = vImporte + (tiempo * precioH);
+	if(vtiempo is not null and vprecioH is not null) then
+		set vImporte = vImporte + (vtiempo * vprecioH);
     end if;
     -- Actualizar el importe total en la reparación
     update reparacion set importeTotal = vImporte, pagado=true where id = pRep;
@@ -128,12 +128,12 @@ begin
 	select v.nombrepropietario, v.matricula, r.fechaHora, r.tiempo, totalReparacion(r.id)  from reparacion r inner join vehiculo v on r.coche = v.codigo where v.nombrePropietario like concat('%',pPropietario,'%');
 end//
 
-create procedure generarFactura(pidRep int, out pHoras float, out precioH float)
+create procedure generarFactura(pIdRep int)
 begin
 	-- Devuelve en los parametros de salida los datos de la mano de obra
-	select 'Mano de Obra' as descripcion ,precioH as importe , tiempo as cantidad , precioH*tiempo as total
+	select 'Mano de Obra' as descripcion ,precioH as importe , tiempo as cantidad , precioH*tiempo as Total
     from reparacion where id = pIdRep;
     -- Detalle de pieza
-	select descripcion,importe,cantidad,importe*cantidad from  piezareparacion inner join  pieza on pieza = codigo
+	select descripcion,importe,cantidad,importe*cantidad from  piezareparacion inner join  pieza v on pieza = codigo
     where reparacion = pIdRep;
 end//

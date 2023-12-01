@@ -3,7 +3,7 @@
     //Incluir libreria PHPMailer
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    require_once '../../autoload.php';
+    require_once '../../../vendor/autoload.php';
     function enviarCorreo(Modelo $bd ,Reparacion $r,$detalle, Propietario $propietario){
         $resultado = false;
         try{
