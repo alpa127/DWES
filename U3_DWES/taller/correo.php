@@ -3,7 +3,8 @@
     //Incluir libreria PHPMailer
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    function enviarCorreo($r,$detalle){
+    require_once '../../autoload.php';
+    function enviarCorreo(Modelo $bd ,Reparacion $r,$detalle, Propietario $propietario){
         $resultado = false;
         try{
             $correo = new PHPMailer(true);
@@ -30,6 +31,9 @@
             $correo->Body="<h1>hola mundo</h1>";
             $correo->Body="<h1>hola mundo</h1>";
 
+            if($correo->send()){
+                $resultado = true;
+            }
         }
        
 

@@ -177,7 +177,7 @@ if ($bd->getConexion() == null) {
         if($r!=null and $r->getPagado()){
             $detalle = $bd->obtenerDetalleReparacion($r->getId());
             var_dump($detalle);
-            enviarCorreo($r,$detalle);
+            enviarCorreo($bd,$r,$detalle,$propietario);
         }else{
             $mensaje = array('e', 'Reparación no existe o no esta pagada');
         }
