@@ -20,7 +20,16 @@
 
             //Configuración del correo que vamos a escribir
             $correo->setFrom('apachonc05@educarex.es','Alvaro');
-            $correo->addAddress()
+            $bd = new Modelo();
+            $coche = $bd->obtenerVehiculoId($r->getCoche());
+            $propietario = $bd->obtenerPropietario($coche->getPropietario());
+            $correo->addAddress($propietario->getEmail(),$propietario->getNombre());
+            //configuración del contenido del mensaje
+            $correo->isHTML(true);
+            $correo->Subject='Factura Reparación Nº'.$r->getId();
+            $correo->Body="<h1>hola mundo</h1>";
+            $correo->Body="<h1>hola mundo</h1>";
+
         }
        
 

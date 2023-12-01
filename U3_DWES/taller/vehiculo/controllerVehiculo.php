@@ -171,6 +171,9 @@ if ($bd->getConexion() == null) {
         }
     }elseif(isset($_POST['enviarR'])){
         $r = $bd->obtenerReparacion($_POST['enviarR']);
+        $coche = $bd->obtenerVehiculoId($r->getCoche());
+            $propietario = $bd->obtenerPropietario($coche->getPropietario());
+        if($propietario->getEmail()!=null){
         if($r!=null and $r->getPagado()){
             $detalle = $bd->obtenerDetalleReparacion($r->getId());
             var_dump($detalle);
@@ -178,6 +181,9 @@ if ($bd->getConexion() == null) {
         }else{
             $mensaje = array('e', 'Reparación no existe o no esta pagada');
         }
+    }else{
+        $mensaje = array('e', 'Error,el propietario no tiene actualuizado el email');
+    }
     }
     session_write_close();
 }
