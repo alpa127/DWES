@@ -15,6 +15,12 @@
             $correo->SMTPAuth = true;
             $correo->Username= 'apachonc05@educarex.es';
             $correo->Password = 'humwvvrkofdpumkd';
+            $correo->SMTPSecure=PHPMailer::ENCRYPTION_SMTPS;
+            $correo->Port= 465;
+
+            //Configuración del correo que vamos a escribir
+            $correo->setFrom('apachonc05@educarex.es','Alvaro');
+            $correo->addAddress()
         }
        
 
