@@ -13,7 +13,7 @@
              $correo->Host = 'smtp.gmail.com';
              $correo->SMTPAuth = true;
              $correo->Username= 'apachonc05@educarex.es';
-             $correo->Password = 'ojraompullnrdaiz';
+             $correo->Password = '';
              $correo->SMTPSecure=PHPMailer::ENCRYPTION_SMTPS;
              $correo->Port= 465;
  
