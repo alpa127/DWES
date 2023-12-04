@@ -173,10 +173,11 @@ if ($bd->getConexion() == null) {
         $r = $bd->obtenerReparacion($_POST['enviarR']);
         $coche = $bd->obtenerVehiculoId($r->getCoche());
         $propietario = $bd->obtenerPropietarioId($coche->getPropietario());
+        
         if($propietario->getEmail()!=null){
         if($r!=null and $r->getPagado()){
             $detalle = $bd->obtenerDetalleReparacion($r->getId());
-
+          
             enviarCorreo($bd,$r,$detalle,$propietario);
         }else{
             $mensaje = array('e', 'Reparación no existe o no esta pagada');
