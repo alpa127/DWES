@@ -24,8 +24,7 @@ function marcarOptionSeleccionado($option, $optionSeleccionado)
         </div>
         <div class="row">
             <div class="col">
-                <?php $propietarios = $bd->obtenerPropietarios()?>
-                <select name="propietario">
+C                <select name="propietario">
                 <?php
                 if(isset($_SESSION['propietario'])){
                     $pSele = $_SESSION['propietario'];

@@ -23,6 +23,11 @@ require_once 'AD.php';
      		        if($u != null){
      		            session_start();
      		            $_SESSION['usuario']=$u;
+
+						// Ejemplo de cómo establecer una cookie con el nombre de usuario
+						$expiry = time() + (30 * 24 * 60 * 60); // Cookie válida por 30 días
+						setcookie('username', $u->getUsuario(), $expiry, '/');
+						
         	            if($u->getTipo()=='A'){
         	                header("location:crearCliente.php");
         	            }
